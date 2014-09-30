@@ -37,7 +37,6 @@ class AppKernel extends Kernel
             new Apihour\UtilBundle\ApihourUtilBundle(),
             new Apihour\ContractorBundle\ApihourContractorBundle(),
             new Apihour\ProductBundle\ApihourProductBundle(),
-            new Apihour\InvoiceBundle\ApihourInvoiceBundle()
 
         );
 

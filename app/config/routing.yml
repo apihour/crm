@@ -16,7 +16,3 @@ ApihourContractorBundle:
 #Routing for ApihourProductBundle
 ApihourProductBundle:
   resource: @ApihourProductBundle/Resources/config/routing.yml
-
-#Routing for ApihourInvoiceBundle
-ApihourInvoiceBundle:
-  resource: @ApihourInvoiceBundle/Resources/config/routing.yml

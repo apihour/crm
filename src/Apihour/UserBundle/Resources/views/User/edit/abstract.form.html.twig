@@ -1,0 +1,117 @@
+{% extends layoutResolver().resolve() %}
+
+{% use '::flash-bag.html.twig' %}
+
+{% block content %}
+    {% set person = userAccount.getPerson() %}
+    {{ block('flash_bag') }}
+
+    <form method="post" action="" role="form" enctype="multipart/form-data">
+    {% block form %}
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ 'user.edit.title_base'|trans }}</h3>
+                <hr />
+            </div>
+            <div class="col-md-6">
+            {% block form_base_left %}
+                {{ form_row(form.person.firstname) }}
+                {{ form_row(form.person.middlename) }}
+                {{ form_row(form.person.lastname) }}
+            {% endblock form_base_left %}
+            </div>
+            <div class="col-md-6">
+            {% block form_base_right %}
+                <div class="form-group connected-group">
+                    {{ form_label(form.person.birthday) }}
+                    <div class="row">
+                        <div class="col-md-3">{{ form_widget(form.person.birthday.day) }}</div>
+                        <div class="col-md-3">{{ form_widget(form.person.birthday.month) }}</div>
+                        <div class="col-md-3">{{ form_widget(form.person.birthday.year) }}</div>
+                    </div>
+                </div>
+                {{ form_row(form.person.birthdayPlace) }}
+                <div class="form-group">
+                    <label>{{ form_label(form.person.avatar) }}</label>
+                    {{ form_errors(form.person.avatar.file) }}
+
+                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                        <div class="fileupload-new thumbnail">
+                            {% if person.getAvatar() != null %}
+                                {% set image_uri = file_image(person.getAvatar().getUri('', '_xl')) %}
+                            {% else %}
+                                {% set image_uri = '/images/anonymous.jpg' %}
+                            {% endif %}
+                            <img src="{{ image_uri }}" alt="">
+                        </div>
+                        <div class="fileupload-preview fileupload-exists thumbnail"></div>
+                        <div class="user-edit-image-buttons">
+                            <span class="btn btn-azure btn-file"><span class="fileupload-new"><i class="fa fa-picture"></i> Select image</span><span class="fileupload-exists"><i class="fa fa-picture"></i> Change</span>
+                                {{ form_widget(form.person.avatar.file) }}
+                            </span>
+                            <a href="#" class="btn fileupload-exists btn-red" data-dismiss="fileupload">
+                                <i class="fa fa-times"></i> Remove
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endblock form_base_right %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ 'user.edit.title_address'|trans }}</h3>
+                <hr />
+            </div>
+            <div class="col-md-6">
+                <h4>{{ form_label(form.person.homeAddress) }}</h4>
+                {{ form_row(form.person.homeAddress.country) }}
+                {{ form_row(form.person.homeAddress.city) }}
+                {{ form_row(form.person.homeAddress.voivodeship) }}
+                {{ form_row(form.person.homeAddress.postalCode) }}
+                {{ form_row(form.person.homeAddress.street) }}
+                <label class="checkbox-inline">
+                {{ form_row(form.person.sameAddress, {'attr': {'class': 'square-grey'} }) }}
+                </label>
+            </div>
+            <div class="col-md-6">
+                <h4>{{ form_label(form.person.correspondenceAddress) }}</h4>
+                {{ form_row(form.person.correspondenceAddress.country) }}
+                {{ form_row(form.person.correspondenceAddress.city) }}
+                {{ form_row(form.person.correspondenceAddress.voivodeship) }}
+                {{ form_row(form.person.correspondenceAddress.postalCode) }}
+                {{ form_row(form.person.correspondenceAddress.street) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>{{ 'user.edit.title_additional'|trans }}</h3>
+                <hr />
+            </div>
+            <div class="col-md-6">
+            {% block form_additional_left %}
+                <div class="phones">
+                </div>
+            {% endblock form_additional_left %}
+            </div>
+            <div class="col-md-6">
+            {% block form_additional_right %}
+            {% endblock form_additional_right %}
+            </div>
+        </div>
+    {% endblock form %}
+
+        <div class="row">
+            <div class="col-md-8">
+                <p>{{ 'user.edit.policy_and_terms'|trans }}</p>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-green btn-block">
+                    <i class="fa fa-arrow-circle-right"></i>
+                    {{ "update"|trans }}
+                </button>
+            </div>
+        </div>
+        {{ form_row(form._token) }}
+    </form>
+{% endblock content %}

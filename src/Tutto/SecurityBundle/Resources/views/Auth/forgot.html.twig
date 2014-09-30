@@ -1,0 +1,30 @@
+{% extends layoutResolver().resolve('::login.html.twig') %}
+{% use '@TuttoCommon/flash-bag.html.twig' %}
+
+{% block content %}
+<div class="box-forgot">
+    <h3>{{ "security:forgot.title"|trans }}</h3>
+    <p>{{ "security:forgot.description"|trans }}</p>
+    <form method="post" action="{{ path('_forgot_password') }}" class="form-forgot">
+        {{ block('flash_bag') }}
+        <fieldset>
+            <div class="form-group {{ form_errors(form.email)|trim|length > 0 ? 'has-error' : '' }}">
+                <span class="input-icon">
+                    {{ form_widget(form.email) }}
+                    <i class="fa fa-envelope"></i>
+                </span>
+                {{ form_errors(form.email) }}
+            </div>
+            <div class="form-actions">
+                <a href="{{ path('_login') }}" class="btn btn-light-grey go-back">
+                    <i class="fa fa-chevron-circle-left"></i> {{ "login"|trans }}
+                </a>
+                <button type="submit" class="btn btn-green pull-right">
+                    {{ "security:forgot.submit"|trans }} <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </div>
+            {{ form_rest(form) }}
+        </fieldset>
+    </form>
+</div>
+{% endblock content %}

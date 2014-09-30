@@ -1,0 +1,21 @@
+dashboard: Dashboard
+my_profile: Mój profil
+logout: Wyloguj
+users:
+  index: Użytkownicy
+  list: Lista użytkowników
+  create_new: Nowy użytkownik
+
+contractors:
+  index: Kontrahenci
+  list: Lista kontrahentów
+  create: Utwórz kontrahenta
+
+products:
+  index: Produkty
+  list: List produktów
+  create: Dodaj nowy produkt
+  packages:
+    index: Grupy produktowe
+    list: Lista grup produktowych
+    create: Nowa grupa produktowa

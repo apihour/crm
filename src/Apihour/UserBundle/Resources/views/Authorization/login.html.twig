@@ -1,0 +1,43 @@
+{% extends layoutResolver().resolve('::login.html.twig') %}
+
+{% use '@TuttoCommon/flash-bag.html.twig' %}
+
+{% block content %}
+    <div class="box-login">
+        <h3>{{ "security:login.title"|trans }}</h3>
+        <p>{{ "security:login.description"|trans }}</p>
+        <form class="form-login" action="{{ path("_login_check") }}" method="post" >
+            {{ block('flash_bag') }}
+            <fieldset>
+                <div class="form-group">
+                    <span class="input-icon">
+                    {{ form_widget(form._username) }}
+                        <i class="fa fa-user"></i> </span>
+                </div>
+                <div class="form-group form-actions">
+                    <span class="input-icon">
+                        {{ form_widget(form._password) }}
+                        <i class="fa fa-lock"></i>
+                        <a class="forgot" href="{{ path('_forgot_password') }}">
+                            {{ "security:not_remember_password"|trans }}
+                        </a>
+                    </span>
+                </div>
+                <div class="form-actions">
+                    <label for="remember" class="checkbox-inline">
+                        {{ form_widget(form._remember_me, {"attr": {"class": "grey remember"}}) }}
+                        {{ "security:login.keep_assigned"|trans }}
+                    </label>
+                    <button type="submit" class="btn btn-green pull-right">
+                        {{ "security:login.submit"|trans }}<i class="fa fa-arrow-circle-right"></i>
+                    </button>
+                </div>
+                <div class="new-account">
+                    {{ "security:login.dont_have_an_account_yet"|trans }}
+                    <a href="{{ path('_registration') }}">{{ "security:login.link_create_account"|trans }}</a>
+                </div>
+            </fieldset>
+            {{ form_rest(form) }}
+        </form>
+    </div>
+{% endblock %}

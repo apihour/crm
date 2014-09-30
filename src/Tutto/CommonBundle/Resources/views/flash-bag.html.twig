@@ -1,0 +1,19 @@
+{% block flash_bag %}
+    {% spaceless %}
+        {% set all = app.session.getFlashBag().all() %}
+        {% if all|length > 0 %}
+            {% for type, messages in all %}
+                {% if type == 'error' %} {% set class = 'alert-danger' %}
+                {% elseif type == 'success' %} {% set class = 'alert-success' %}
+                {% elseif type == 'alert' %} {% set class = 'alert-warning' %}
+                {% else %} {% set class = 'alert-info' %} {% endif %}
+                <div class="errorHandler alert {{ class }}">
+                    <i class="fa fa-remove-sign"></i>
+                    {% for message in messages %}
+                        {{ message|trans|raw }}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

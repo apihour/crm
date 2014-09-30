@@ -1,0 +1,11 @@
+{% extends layoutResolver().resolve('::login.html.twig') %}
+
+{% use '@TuttoDataGrid/datagrid.html.twig' %}
+
+{% block content %}
+    <div class="box-login">
+        <h3>{{ "" }}</h3>
+
+        {{ block('grid_content') }}
+    </div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+tutto_security:
+  resource: @TuttoSecurityBundle/Resources/config/routes.yml
+
+#Routing for ApihourFrontendBundle
+ApihourFrontendBundle:
+  resource: @ApihourFrontendBundle/Resources/config/routing.yml
+
+#Routing for ApihourUserBundle
+ApihourUserBundle:
+  resource: @ApihourUserBundle/Resources/config/routing.yml
+
+#Routing for ApihourContractorBundle
+ApihourContractorBundle:
+  resource: @ApihourContractorBundle/Resources/config/routing.yml
+
+#Routing for ApihourProductBundle
+ApihourProductBundle:
+  resource: @ApihourProductBundle/Resources/config/routing.yml
+
+#Routing for ApihourInvoiceBundle
+ApihourInvoiceBundle:
+  resource: @ApihourInvoiceBundle/Resources/config/routing.yml

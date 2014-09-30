@@ -1,0 +1,11 @@
+AuthorizationController:
+  resource: @ApihourUserBundle/Controller/AuthorizationController.php
+  type: annotation
+
+UserAccountController:
+  resource: @ApihourUserBundle/Controller/UserAccountController.php
+  type: annotation
+
+UserController:
+  resource: @ApihourUserBundle/Controller/UserController.php
+  type: annotation

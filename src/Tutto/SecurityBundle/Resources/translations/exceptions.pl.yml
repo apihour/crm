@@ -1,0 +1,5 @@
+userNotLogged: Nie jesteś zalogowany.
+permissionDenied: Nie masz uprawnień aby oglądać tej strony.
+notImplementsAuthorizationAnnotation: Kontroler: '%controller%' lub akcja: '%action%' nie posiada adnotacji "Authorization".
+notController: Uwaga! To nie jest kontroler!.
+accountHasNoControl: Na tym koncie nie ma włączonej kontrolki: (%controls%).

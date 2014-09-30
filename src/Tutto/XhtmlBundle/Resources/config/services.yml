@@ -1,0 +1,5 @@
+services:
+  tutto.xhtml:
+    class: Tutto\XhtmlBundle\Twig\XhtmlExtension
+    tags:
+      - { name: twig.extension }

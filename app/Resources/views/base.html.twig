@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
+<!--[if !IE]><!-->
+<html>
+<!--<![endif]-->
+    <head>
+		<title>{% block title %}Welcome!{% endblock %}</title>
+        <meta charset="utf-8" />
+        <!--[if IE]><meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" /><![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="description" content="{% block meta_description %}{% endblock meta_description %}" />
+        <meta name="keywords" content="{% block meta_keywords %}{% endblock %}" />
+
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,200,100,800' rel='stylesheet' type='text/css'>
+        {% block stylesheets %}
+            {# start: MAIN CSS #}
+            {% stylesheets
+                '../app/Resources/plugins/bootstrap/css/bootstrap.min.css'
+                '../app/Resources/plugins/font-awesome/css/font-awesome.min.css'
+                '../app/Resources/plugins/perfect-scrollbar/src/perfect-scrollbar.css'
+                '../app/Resources/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css'
+                '../app/Resources/plugins/toastr/toastr.min.css'
+                '../app/Resources/plugins/bootstrap-datepicker/css/datepicker.css'
+                '../app/Resources/plugins/DataTables/media/css/DT_bootstrap.css'
+                '../app/Resources/plugins/select2/select2.css'
+                '../app/Resources/plugins/x-editable/css/bootstrap-editable.css'
+                '../app/Resources/plugins/typeaheadjs/lib/typeahead.js-bootstrap.css'
+                '../app/Resources/plugins/nvd3/nv.d3.css'
+                '../app/Resources/plugins/animate.css/animate.min.css' %}
+                <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+            {# end: MAIN CSS #}
+            {# start: iCheck CSS #}
+            {% stylesheets
+            '../app/Resources/plugins/iCheck/skins/minimal/_all.css'
+            '../app/Resources/plugins/iCheck/skins/square/_all.css'
+            '../app/Resources/plugins/iCheck/skins/flat/_all.css'
+            '../app/Resources/plugins/iCheck/skins/line/_all.css'
+            '../app/Resources/plugins/iCheck/skins/polaris/polaris.css'
+            '../app/Resources/plugins/iCheck/skins/futurico/futurico.css' %}
+            <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+            {# end: iCheck CSS #}
+            {# start: CORE CSS #}
+            {% stylesheets
+                '../app/Resources/css/styles.css'
+                '../app/Resources/css/styles-responsive.css'
+                '../app/Resources/css/plugins.css'
+                '../app/Resources/css/themes/theme-default.css' %}
+                <link rel="stylesheet" type="text/css" charset="UTF-8" media="all" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+            {% stylesheets
+            '../app/Resources/css/print.css' %}
+            <link rel="stylesheet" type="text/css" charset="UTF-8" media="print" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+            {# end: CORE CSS #}
+        {% endblock %}
+
+        {% block javascripts %}
+            <!--[if lt IE 9]>
+            {% javascripts
+            '../app/Resources/plugins/respond.min.js'
+            '../app/Resources/plugins/excanvas.min.js'
+            '../app/Resources/plugins/jQuery/jquery-1.11.1.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <![endif]-->
+            <!--[if gte IE 9]><!-->
+            {% javascripts
+            '../app/Resources/plugins/jQuery/jquery-2.1.1.min.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <!--<![endif]-->
+            {% javascripts
+            '../app/Resources/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js'
+            '../app/Resources/plugins/bootstrap/js/bootstrap.min.js'
+            '../app/Resources/plugins/blockUI/jquery.blockUI.js'
+            '../app/Resources/plugins/iCheck/jquery.icheck.min.js'
+            '../app/Resources/plugins/jquery.transit/jquery.transit.js'
+            '../app/Resources/plugins/moment/min/moment.min.js'
+            '../app/Resources/plugins/perfect-scrollbar/src/jquery.mousewheel.js'
+            '../app/Resources/plugins/perfect-scrollbar/src/perfect-scrollbar.js'
+            '../app/Resources/plugins/bootbox/bootbox.min.js'
+            '../app/Resources/plugins/jquery.scrollTo/jquery.scrollTo.min.js'
+            '../app/Resources/plugins/ScrollToFixed/jquery-scrolltofixed-min.js'
+            '../app/Resources/plugins/jquery.appear/jquery.appear.js'
+            '../app/Resources/plugins/jquery-cookie/jquery.cookie.js'
+            '../app/Resources/plugins/velocity/jquery.velocity.min.js'
+            '../app/Resources/plugins/bootstrap-fileupload/bootstrap-fileupload.min.js'
+            '../app/Resources/plugins/toastr/toastr.min.js'
+            '../app/Resources/plugins/TouchSwipe/jquery.touchSwipe.min.js'
+            '../app/Resources/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js'
+            '../app/Resources/plugins/autosize/jquery.autosize.min.js'
+            '../app/Resources/plugins/select2/select2.min.js'
+            '../app/Resources/plugins/jquery.maskedinput/src/jquery.maskedinput.js'
+            '../app/Resources/plugins/nvd3/lib/d3.v3.js'
+            '../app/Resources/plugins/nvd3/nv.d3.min.js'
+            '../app/Resources/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'
+            '../app/Resources/plugins/x-editable/js/bootstrap-editable.min.js'
+            '../app/Resources/plugins/typeaheadjs/typeaheadjs.js'
+            '../app/Resources/plugins/typeaheadjs/lib/typeahead.js'
+            '../app/Resources/js/charts.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+        <link rel="shortcut icon" href="/favicon.ico" />
+    </head>
+
+    <body class="{% block body_class %}{% endblock body_class %}">
+        {% if form is defined %}{%  form_theme form '::form_custome.html.twig'%}{% endif %}
+        {% block body %}{% endblock body %}
+
+        {% javascripts
+            '../app/Resources/js/main.js' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        <script>
+            jQuery(document).ready(function($) {
+                Main.init();
+                $.fn.editable.defaults.mode = 'popup';
+
+                $('.editable-column').editable({
+                    success: function (response, config) {
+                        if (response.success === true) {
+                            toastr.success(response.message);
+                        } else {
+                            toastr.error(response.message);
+                            return false;
+                        }
+                    },
+                    error: function(response, newValue) {
+                        toastr.error(response.responseJSON.message);
+                        return response.responseJSON.message;
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,3 @@
+InvoiceController:
+  resource: @ApihourInvoiceBundle/Controller/InvoiceController.php
+  type: annotation

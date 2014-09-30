@@ -1,0 +1,31 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     77.55.199.245
+    database_port:     3307
+    database_name:     dwa_2
+    database_user:     dwa_2
+    database_password: TEstuje123
+
+    file_manager.server: http://media.crmatic.net/
+    file_manager.class: Gaufrette\Adapter\Ftp
+    file_manager.dir: "/1plus1/media.crmatic.net"
+    file_manager.host: dwa.nazwa.pl
+    file_manager.port: 21
+    file_manager.username: dwa
+    file_manager.password: JEDEN@Jeden@2222
+
+    mailer_transport: smtp
+    mailer_port: 465
+    mailer_encryption: ssl
+    mailer_host: dwa.nazwa.pl
+    mailer_auth_mode: login
+    mailer_sender_address: apihour@dwa.nazwa.pl
+    mailer_user: apihour@dwa.nazwa.pl
+    mailer_password: TEstuje123
+
+    assets_base_urls: ~
+
+    translator.class: Tutto\CommonBundle\Services\Translator
+
+    locale:            pl
+    secret:            ThisTokenIsNotSoSecretChangeIt

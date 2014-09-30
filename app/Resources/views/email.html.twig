@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{% endblock title %}
+{% block meta_description %}{% endblock meta_description %}
+{% block meta_keywords %}{% endblock meta_keywords %}
+
+{% block javascripts %}{% endblock javascripts %}
+
+{% block stylesheets %}
+    {% stylesheets
+        '@TuttoFrontendBundle/Resources/public/css/ui-lightness/jquery-ui-1.10.4.custom.css'
+        '@TuttoFrontendBundle/Resources/public/css/font-awesome.min.css'
+        '@TuttoFrontendBundle/Resources/public/css/bootstrap.min.css'
+        '@TuttoFrontendBundle/Resources/public/css/bootstrap-theme.min.css'
+        '@TuttoFrontendBundle/Resources/public/css/style.css'
+        '@TuttoFrontendBundle/Resources/public/css/email.css' %}
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block body %}
+    <div id="email-container">
+        <header>
+            <h3>{% block header %}{% endblock header %}</h3>
+        </header>
+        {% block content %}{% endblock content %}
+
+        <footer>
+            {% block footer %}
+            {% endblock footer %}
+        </footer>
+    </div>
+{% endblock body %}

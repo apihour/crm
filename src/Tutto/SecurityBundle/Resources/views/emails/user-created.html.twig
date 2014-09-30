@@ -1,0 +1,9 @@
+{% extends 'TuttoFrontendBundle::layout.email.html.twig' %}
+
+{% block content %}
+    <h3>User created</h3>
+    <p>
+        Your activation link is:
+        <a href="{{ url('_user_activate', {'id': user.getId(), 'email': user.getEmail(), 'token': user.getConfirmationToken}) }}">link</a>
+    </p>
+{% endblock %}

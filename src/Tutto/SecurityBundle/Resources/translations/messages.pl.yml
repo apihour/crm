@@ -1,0 +1,8 @@
+accountNotFound: Konto nie istnieje
+firstname: Imię
+password:
+  first: Hasło
+  second: Powtórz hasło
+
+login: Zaloguj
+logout: Wyloguj

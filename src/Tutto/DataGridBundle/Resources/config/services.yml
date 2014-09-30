@@ -1,0 +1,5 @@
+services:
+  datagrid.twig:
+    class: Tutto\DataGridBundle\Twig\DataGridExtension
+    tags:
+      - { name: twig.extension }

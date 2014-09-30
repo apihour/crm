@@ -1,0 +1,29 @@
+{% extends '::base.html.twig' %}
+
+{% block body_class 'login' %}
+
+{% block body %}
+    <div class="row">
+        <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+            <div class="logo">
+                <img src="{{ asset('/images/logo.png') }}">
+            </div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '../app/Resources/plugins/jquery-validation/dist/jquery.validate.min.js'
+        '../app/Resources/js/login.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        jQuery(document).ready(function() {
+            Login.init();
+        });
+    </script>
+{% endblock %}

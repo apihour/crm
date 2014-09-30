@@ -1,0 +1,6 @@
+services:
+  file.twig:
+    class: Tutto\FileBundle\Twig\FileManagerExtension
+    arguments: ["@service_container"]
+    tags:
+      - { name: twig.extension }

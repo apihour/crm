@@ -1,0 +1,35 @@
+{% extends layoutResolver().resolve('::login.html.twig') %}
+{% use 'TuttoCommonBundle::flash-bag.html.twig' %}
+
+{% block content %}
+<div class="box-register">
+    <h3>{{ "security:register.sign_up"|trans }}</h3>
+    <p>{{ "security:register.description"|trans }}
+
+    <form method="post" action="{{ path('_registration') }}" class="form-register">
+        {{ block('flash_bag') }}
+        <fieldset>
+            <div class="form-group">
+                {{ form_row(form.firstname, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.plainPassword.first) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.plainPassword.second) }}
+            </div>
+            <div class="form-actions">
+                {{ "security:register.already_have_account"|trans }}
+                <a href="{{ path('_login') }}">{{ "security:login.submit"|trans }}</a>
+                <button type="submit" class="btn btn-green pull-right">
+                    {{ "security:register.submit"|trans }} <i class="fa fa-arrow-circle-right"></i>
+                </button>
+            </div>
+            {{ form_rest(form) }}
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+services:
+  #Listener to check if user is suspended.
+  tutto_security.user_suspended_check_listener:
+    class: Tutto\SecurityBundle\Listeners\UserSuspendedCheckListener
+    calls:
+      - [setContainer, ["@service_container"] ]
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, method: handle }
+
+  #Exception service
+  exception_listener:
+    class: Tutto\SecurityBundle\Listeners\ExceptionListener
+    arguments: ["@templating"]
+    calls:
+      - [setContainer, ["@service_container"] ]
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }

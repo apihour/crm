@@ -1,0 +1,28 @@
+accountNotFound: Adres e-mail <b>'%email%'</b> nie istnieje w naszej bazie.
+not_remember_password: Nie pamiętasz hasła ?
+remember_me: Pamiętaj mnie
+
+user:
+  email_exists: Taki adres e-mail: '%email%' już istnieje w bazie.
+
+login:
+  title: Zaloguj się do swojego konta
+  description: Wprowadź swój adres e-mail i hasło żeby się zalogować.
+  keep_assigned: Zapamiętaj mnie
+  submit: Zaloguj
+
+register:
+  sign_up: Rejestracja
+  description: Wprowadź poniżej swoje dane
+  already_have_account: Masz już konto?
+  submit: Zarejestruj się
+
+reset_password:
+  header: Generowanie nowego hasła
+  info: Jeśli nie pamiętasz swojego hasła, możesz go tutaj wygenerować. Nowe hasło zostanie przesłane na Twój adres e-mail jeśli wcześniej się zarejestrowałeś.
+  success: Wygenerowano nowe hasło. Na podany adres e-mail zostanie przesłane nowe hasło
+  send: Resetuj hasło
+  email:
+    header: Wygenerowano hasło
+    subject: Wygenerowano nowe hasło
+    content: Twój login to %email%. Wygenerowano nowe hasło dla Twojego konta. Nowe hasło to '%new_password%' (bez cudzysłowów).<br /> Jeśli chcesz się zalogować, kliknij w ten link: %link%.

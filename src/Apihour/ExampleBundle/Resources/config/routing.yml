@@ -1,0 +1,3 @@
+DataGridController:
+  resource: "@ApihourExampleBundle/Controller/DataGridController.php"
+  type: annotation

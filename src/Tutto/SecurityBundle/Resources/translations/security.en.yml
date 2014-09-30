@@ -1,0 +1,14 @@
+login:
+  title: Sign in to your account
+  description: Please enter your e-mail and password to log in.
+  dont_have_an_account_yet: Don't have an account yet?
+  link_create_account: Create an account
+
+register:
+  already_have_account: Already have an account?
+
+forgot:
+  title: Forget Password?
+  description: Enter your e-mail address below to reset your password.
+  formNotValid: Form is not valid, please correct it.
+  submit: Submit

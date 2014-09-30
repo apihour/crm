@@ -1,0 +1,11 @@
+{% extends layoutResolver().resolve('::base.html.twig') %}
+
+{% block title %}{{ "messages:error_occured"|trans }}{% endblock title %}
+{% block meta_description %}{% endblock meta_description %}
+{% block meta_keywords %}{% endblock meta_keywords %}
+
+{% block body %}
+<div class="main-wrapper">
+    {{ dump(exception) }}
+</div>
+{% endblock body %}

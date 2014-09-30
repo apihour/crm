@@ -1,0 +1,21 @@
+services:
+  tutto.common.layout_resolver:
+    class: Tutto\CommonBundle\Twig\LayoutResolverExtension
+    arguments: ["@service_container"]
+    tags:
+      - { name: twig.extension }
+
+  tutto.common.flash_bag:
+    class: Tutto\CommonBundle\Twig\FlashBagExtension
+    tags:
+      - { name: twig.extension }
+
+  tutto.common.custom:
+    class: Tutto\CommonBundle\Twig\CustomExtension
+    tags:
+      - { name: twig.extension }
+
+  tutto.common.form:
+    class: Tutto\CommonBundle\Twig\FormExtension
+    tags:
+      - { name: twig.extension }

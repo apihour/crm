@@ -1,0 +1,69 @@
+{% extends '::layout.html.twig' %}
+
+{% use 'TuttoXhtmlBundle::xhtml.html.twig' %}
+{% use 'TuttoCommonBundle::flash-bag.html.twig'  %}
+
+{% block container %}
+	<div id="data-grid">
+		<div id="left_sidebar">
+			{% block left_sidebar %}
+                <div>{{ block('flash_bag') }}</div>
+				<form method="post" action="{{ grid.generateRoute() }}">
+					{{ form_errors(grid.getForm()) }}
+					{{ form_rest(grid.getForm()) }}
+					<button class="btn btn-info">{{ "messages:search"|trans }}</button>
+					<a href="?clear_filters=1" class="btn btn-default">{{ "messages:clear_filters"|trans }}</a>
+				</form>
+			{% endblock left_sidebar %}
+		</div>
+		<div id="content">
+			{% block content %}
+            <form method="post" action="">
+                <div>
+                    {% for batchAction in grid.getGridDefinitionBuilder().getBatchActions() %}
+                        <button type="submit" name="batchAction" value="{{ batchAction.getName() }}">{{ batchAction.getLabel()|trans }}</button>
+                        {% if batchAction.hasAttribute('additional_form_element') %}
+                            {% for attrib in batchAction.getAttribute('additional_form_element') %}
+                            <input type="hidden" name="additional_form_element[{{ batchAction.getName() }}][{{ attrib.name }}]" value="{{ attrib.value }}" />
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+				{% if grid is defined %}
+					{% if grid.count() > 0 %}
+						<table class="table table-bordered">
+							<thead>
+							<tr>
+								{% for col in grid.getGridDefinitionBuilder().getColumns() %}
+									<th>
+										{% set label 	= col.getLabel()|trans %}
+										{% set accessor = col.getSortAccessor() %}
+										{% if col.isSortable() %}
+											<a href="{{ grid.generateSortRoute(accessor) }}">{{ label }}</a>
+										{% else %}{{ label|raw }}{% endif %}
+									</th>
+								{% endfor %}
+							</tr>
+							</thead>
+							<tbody>
+							{% for row in grid.getRowCollection().getRows() %}
+								<tr>
+									{% for cell in row.getCells() %}
+										{% set tag = cell.getValue() %}
+										<td>{{ block('xhtml') }}</td>
+									{% endfor %}
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+						{% include 'TuttoDataGridBundle::pagination.html.twig' with {pagination: grid}%}
+					{% else %}
+						<p>No results</p>
+					{% endif %}
+				{% endif %}
+            </form>
+			{% endblock content %}
+		</div>
+		<div class="clear"></div>
+	</div>
+{% endblock container %}

@@ -1,0 +1,35 @@
+{%- block grid_paginator -%}{% spaceless %}
+    <script>
+        $(function() {
+            $('ul.pagination').delegate('li.disabled a, li.active a', 'click', function() {
+                return false;
+            });
+        });
+    </script>
+
+    {% if grid.paginator.getPages() > 1 %}
+    {% set paginator = grid.paginator %}
+    <ul class="pagination pagination-blue">
+        {% if paginator.getPrevious() is null %}
+            <li class="disabled"><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+        {% else %}
+            <li><a href="{{ grid.generateRoute({'page': paginator.getPrevious()}) }}"><i class="fa fa-chevron-left"></i></a></li>
+        {% endif %}
+
+        {% for page in 1..paginator.getPages() %}
+            {% if paginator.getCurrent() == page %}
+                <li class="active"><a href="#">{{ page }}</a></li>
+            {% else %}
+                <li><a href="{{ grid.generateRoute({'page': page}) }}">{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if paginator.getNext() is null %}
+            <li class="disabled"><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+        {% else %}
+            <li><a href="{{ grid.generateRoute({'page': paginator.getNext()}) }}"><i class="fa fa-chevron-right"></i></a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+    {% endspaceless %}
+{%- endblock grid_paginator -%}

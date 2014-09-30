@@ -1,0 +1,30 @@
+logout: Wyloguj
+online: Online
+user_status: Status
+email: Adres e-mail
+login: Login
+password: Hasło
+status: Status
+actions: Akcje
+
+category:
+  create: Stwórz kategorię
+  select: Wybierz kategorię
+  empty: Nie ma żadnej kategorii
+  name: Nazwa
+  parent: Podkategoria
+  description: Opis
+  empty_value: Wybierz podkategorię
+
+tooltip:
+  view: Podgląd
+  edit: Edycja
+  suspend: Zawieś
+  activate: Aktualizuj
+
+panel:
+  tool:
+    collapse: Zwiń
+    refresh: Odśwież
+    conf: Konfiguracja
+    expand: Perłny ekran

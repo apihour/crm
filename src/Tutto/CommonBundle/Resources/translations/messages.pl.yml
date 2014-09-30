@@ -1,0 +1,5 @@
+status:
+  enabled: Włączony
+  disabled: Wyłączony
+  archived: Archiwalny
+  flagged: Flagowany

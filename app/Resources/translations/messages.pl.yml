@@ -1,0 +1,32 @@
+welcome: Witaj
+error_occured: Wystąpił błąd
+country: Kraj
+city: Miasto
+voivodeship: Województwo
+postalCode: Kod pocztowy
+street: Adres
+searcher: Wyszukiwarka
+
+formNotValid: Formularz jest nie poprawny.
+couldNotUpdate: W tej chwili nie można było zapisać danych.
+
+success: Pomyślność
+error: Błąd
+alert: Uwaga
+
+paginator:
+  show_results_info: Pokazuje od %from% do %to% wyników z %all% wszystkich
+
+firstname: Imię
+middlename: Drugie imię
+lastname: Nazwisko
+birthday: Data urodzenia
+birthdayPlace: Miejsce urodzenia
+
+update: Wyślij
+
+flash_bag:
+  message:
+    success: Dane zostały zapisane.
+    error: Nie udało się zapisać danych.
+    alert: Dorobi komunikat

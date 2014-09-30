@@ -1,0 +1,9 @@
+{% extends '::layout.html.twig' %}
+
+{% use 'TuttoDataGridBundle::datagrid.html.twig' %}
+{% use 'TuttoXhtmlBundle::xhtml.html.twig' %}
+
+{% block content %}
+    {{ block('grid_search_form') }}
+    {{ block('grid_content') }}
+{% endblock content %}

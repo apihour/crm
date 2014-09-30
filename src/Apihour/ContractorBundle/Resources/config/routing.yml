@@ -1,0 +1,3 @@
+ApihourContractorBundle:
+  resource: @ApihourContractorBundle/Controller/ContractorController.php
+  type: annotation

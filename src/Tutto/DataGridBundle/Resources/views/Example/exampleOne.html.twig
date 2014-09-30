@@ -1,0 +1,7 @@
+{% extends layoutResolver().resolve() %}
+
+{% use '@TuttoDataGrid/datagrid.html.twig' %}
+
+{% block content %}
+    {{ block('grid_content') }}
+{% endblock content %}

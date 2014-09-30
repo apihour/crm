@@ -1,0 +1,49 @@
+services:
+ security.user_manager:
+    class: Apihour\UserBundle\Services\UserManager
+    arguments: ["@security.encoder_factory", "@fos_user.util.username_canonicalizer", "@fos_user.util.email_canonicalizer", "@fos_user.entity_manager", "%fos_user.model.user.class%"]
+
+
+ security.user_provider:
+  class: Apihour\UserBundle\Services\UserProvider
+  arguments: ["@security.user_manager"]
+
+
+ #Listener, sprawdzający autoryzację użytkownika na podstawie adnotacji.
+ apihour.user.authorization:
+  class: Apihour\UserBundle\EventListener\AuthorizationListener
+  calls:
+    - [setContainer, ["@service_container"]]
+    - [setExcludedRoutes, [["_wdt", "apihour_user_accounts_list", "apihour_user_account_switch"]]]
+    - [setRedirectRouteName, ["apihour_user_accounts_list"]]
+  tags:
+    - { name: kernel.event_subscriber }
+
+
+ #Listener, który zczytuje z adnotacji dodatkowe dane do widoku.
+ tutto.common.page_data:
+  class: Tutto\CommonBundle\EventListener\PageDataListener
+  arguments: ["@service_container"]
+  tags:
+    - { name: kernel.event_listener, event: kernel.controller, method: handle }
+
+
+ #Listener, który ustawia metadane
+ tutto.common.metadata:
+  class: Tutto\CommonBundle\EventListener\MetadataListener
+  arguments: ["@service_container"]
+  tags:
+    - { name: kernel.event_listener, event: kernel.controller, method: handle }
+
+
+ #Listener, który wybiera odpowiednie menu dla użytkownika.
+ tutto.common.menu:
+  class: Tutto\CommonBundle\EventListener\MenuListener
+  arguments: ["@service_container"]
+  tags:
+    - { name: kernel.event_listener, event: kernel.controller, method: handle }
+
+ apihour.file.adapter:
+  class: "%file_manager.class%"
+  arguments: ["%file_manager.dir%", "%file_manager.host%", {"username": "%file_manager.username%", "password": "%file_manager.password%", "port": "%file_manager.port%"} ]
+

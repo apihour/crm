@@ -1,0 +1,82 @@
+{% extends layoutResolver().resolve() %}
+
+{% use '@TuttoXhtml/xhtml.html.twig' %}
+{% use '@TuttoDataGrid/datagrid.html.twig' %}
+
+{% block simple_content %}
+<script>
+$(function() {
+    $('#chart4').lineChart($('#sell-products-chart .panel-refresh'), {data: {{ render(path('test')) }} });
+});
+</script>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-light-grey">
+            <div class="panel-heading">
+                <h4 class="panel-title">{{ "searcher"|trans }}</h4>
+                <ul class="panel-heading-tabs border-light">
+                    <li class="panel-tools" id="sell-products-chart">
+                        {{ xhtml().render(paneltool().dropdown())|raw }}
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form_widget(grid.filters().type) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-azure">
+            <div class="panel-heading border-light">
+                <h4 class="panel-title">Site <span class="text-bold">Visits</span></h4>
+                <ul class="panel-heading-tabs border-light">
+                    <li class="panel-tools" id="sell-products-chart">
+                        {{ xhtml().render(paneltool().dropdown())|raw }}
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="height-155">
+                        <div id="chart4" data-url="{{ path('test') }}" class="with-3d-shadow with-transitions">
+                            <svg></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="pull-left">
+                            {{ "product:table.list"|trans }}
+                            <span class="text-bold">{{ "product:table.products"|trans }}</span>
+                        </h4>
+
+                        <div class="btn-group pull-right">
+                            <button data-toggle="dropdown" class="btn btn-success dropdown-toggle">
+                                {{ 'product:add_new'|trans }}
+                                <i class="fa fa-plus"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-dark pull-right">
+                                <li><a href="{{ path('apihour_product_create', {'type': 'sell'}) }}" data-table="#sample-table-2" data-ignoreColumn ="3,4">{{ "product:create.sell_product"|trans }}</a></li>
+                                <li><a href="{{ path('apihour_product_create', {'type': 'buy'}) }}" data-table="#sample-table-2" data-ignoreColumn ="3,4">{{ "product:create.buy_product"|trans }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {{ block('grid_content') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock simple_content %}

@@ -1,0 +1,172 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ metadata.title|length > 0 ? metadata.title|trans : '' }}{% endblock title %}
+{% block meta_description %}{{ metadata.description|length > 0 ? metadata.description|trans : '' }}{% endblock meta_description %}
+{% block meta_keywords %}{{ metadata.keywords|length > 0 ? metadata.keywords|trans : parent() }}{% endblock meta_keywords %}
+
+{% block body %}
+    {% use '::flash-bag.html.twig' %}
+    {{ block('flash_bag') }}
+
+    <div class="main-wrapper">
+        <header class="topbar navbar navbar-inverse navbar-fixed-top inner">
+            <!-- start: TOPBAR CONTAINER -->
+            <div class="container">
+               {% block header %}
+                   <div class="navbar-header">
+                       <a class="sb-toggle-left hidden-md hidden-lg" href="#main-navbar">
+                           <i class="fa fa-bars"></i>
+                       </a>
+                       <!-- start: LOGO -->
+                       <a class="navbar-brand" href="{{ path("_home") }}">
+                           <img src="/images/logo.png" alt="Rapido"/>
+                       </a>
+                       <!-- end: LOGO -->
+                   </div>
+                   <div class="topbar-tools">
+                       <ul class="nav navbar-right">
+                           <li class="dropdown current-user">
+                               <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
+                                   {% if user().getAvatar() != null %}
+                                       <img src="{{ file_image(user().getAvatar().getUri('', '_small')) }}" class="img-circle" alt="">
+                                   {% endif %}
+
+                                   <span class="username hidden-xs">
+                                       {{ user().getFirstname()~' '~user().getLastname() }}
+                                   </span> <i class="fa fa-caret-down "></i>
+                               </a>
+                               {{ knp_menu_render('ApihourMenuBundle:TopBarToolMenu:create', {'template': 'ApihourMenuBundle::knp_menu.html.twig','ancestorClass': 'active','currentClass': 'active' }) }}
+                           </li>
+                       </ul>
+                   </div>
+               {% endblock header %}
+            </div>
+            <!-- end: TOPBAR CONTAINER -->
+        </header>
+        <a class="closedbar inner hidden-sm hidden-xs" href="#"></a>
+        <nav id="pageslide-left" class="pageslide inner">
+            {% block sidebar_left %}
+            <div class="navbar-content">
+                <!-- start: SIDEBAR -->
+                <div class="main-navigation left-wrapper transition-left">
+                    <div class="navigation-toggler hidden-sm hidden-xs">
+                        <a href="#" class="sb-toggle-left"></a>
+                    </div>
+                    <div class="user-profile border-top padding-horizontal-10 block">
+                    {% block profile %}
+                        <div class="inline-block">
+                            {% if user().getAvatar() != null %}
+                                <img src="{{ file_image(user().getAvatar().getUri('', '_medium')) }}" alt=""/>
+                            {% endif %}
+                        </div>
+                        <div class="inline-block">
+                            <h5 class="no-margin">{{ "messages:welcome"|trans }}</h5>
+                            <h4 class="no-margin">{{ user().getFirstname()~' '~user().getLastname() }}</h4>
+                            <a class="btn user-options sb_toggle">
+                                <i class="fa fa-cog"></i>
+                            </a>
+                        </div>
+                    {% endblock profile %}
+                    </div>
+                    {% block main_navigation %}
+                        {{ knp_menu_render('ApihourMenuBundle:MainMenu:create', {'template': 'ApihourMenuBundle::knp_menu.html.twig','ancestorClass': 'active','currentClass': 'active' }) }}
+                    {% endblock main_navigation %}
+                </div>
+                <!-- end: SIDEBAR -->
+            </div>
+            <div class="slide-tools">
+                <div class="col-xs-6 text-left no-padding">
+                    <a class="btn btn-sm status" href="#">
+                        {% block user_status %}
+                            {{ "messages:user_status"|trans }}
+                            <i class="fa fa-dot-circle-o text-green"></i> <span>{{ "messages:online"|trans }}</span>
+                        {% endblock user_status %}
+                    </a>
+                </div>
+                <div class="col-xs-6 text-right no-padding">
+                    <a class="btn btn-sm log-out text-right" href="{{ path('_logout') }}">
+                        <i class="fa fa-power-off"></i>
+                        {{ "messages:logout"|trans }}
+                    </a>
+                </div>
+            </div>
+            {% endblock sidebar_left %}
+        </nav>
+
+        <!-- start: MAIN CONTAINER -->
+        <div class="main-container inner">
+        <!-- start: PAGE -->
+            <div class="main-content">
+                <div class="container">
+                    <!-- start: PAGE HEADER -->
+                    <!-- start: TOOLBAR -->
+                    <div class="toolbar row">
+                        <div class="col-sm-6 hidden-xs">
+                            <div class="page-header">
+                                {% block page_header %}
+                                    {% if page_data.title is defined %}
+                                        <h1>
+                                            {{ page_data.title|trim|trans }}
+                                            {% if page_data.subtitle is defined %}
+                                                <small>{{ page_data.subtitle|trim|trans }}</small>
+                                            {% endif %}
+                                        </h1>
+                                    {% endif %}
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end: TOOLBAR -->
+                    <!-- end: PAGE HEADER -->
+                    <!-- start: BREADCRUMB -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% block breadcrumbs %}
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a href="#">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    Blank Page
+                                </li>
+                            </ol>
+                            {% endblock breadcrumbs %}
+                        </div>
+                    </div>
+                    <!-- end: BREADCRUMB -->
+                    <!-- start: PAGE CONTENT -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% block simple_content %}
+                            <div class="panel panel-white">
+                                <div class="panel-body">
+                                    {% block content %}{% endblock content %}
+                                </div>
+                            </div>
+                            {% endblock simple_content %}
+                        </div>
+                    </div>
+                    <!-- end: PAGE CONTENT-->
+                </div>
+            </div>
+        <!-- end: PAGE -->
+        </div>
+        <!-- end: MAIN CONTAINER -->
+        <!-- start: FOOTER -->
+        <footer class="inner">
+            {% block footer %}
+                <div class="footer-inner">
+                    <div class="pull-left">
+                        2014 &copy; apihour.net
+                    </div>
+                    <div class="pull-right">
+                        <span class="go-top"><i class="fa fa-chevron-up"></i></span>
+                    </div>
+                </div>
+            {% endblock %}
+        </footer>
+        <!-- end: FOOTER -->
+    </div>
+{% endblock %}

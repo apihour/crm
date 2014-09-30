@@ -1,0 +1,47 @@
+{#  #}
+{%- block xhtml -%}{% spaceless %}
+        {% if tag.getAliasName() == 'single_tag' %}
+            {{ block('xhtml_single_tag') }}
+        {% elseif tag.getAliasName() == 'simple_text' %}
+            {{ block('xhtml_simple_text') }}
+        {% elseif tag.getAliasName() == 'tag' %}
+            {{ block('xhtml_tag') }}
+        {% endif %}
+	{% endspaceless %}
+{%- endblock xhtml -%}
+
+{%- block xhtml_tag -%}{% spaceless %}
+    {% set attr = block('xhtml_attributes') %}
+    {% if attr is not empty %}{% set attr = ' '~attr %}{% endif %}
+    {{ ('<'~tag.getName()~attr~'>')|trim|raw }}{{ block('xhtml_children') }}{{ ('</'~tag.getName()~'>')|trim|raw }}
+    {% endspaceless %}
+{%- endblock xhtml_tag -%}
+
+{%- block xhtml_single_tag -%}{% spaceless %}
+    {{ ('<'~tag.getName()~' '~block('xhtml_attributes')~' />')|trim|raw }}{{ block('xhtml_children') }}
+    {% endspaceless %}
+{%- endblock xhtml_single_tag -%}
+
+{%- block xhtml_simple_text -%}{% spaceless %}
+    {{ tag.getText()|trim|raw }}{{ block('xhtml_children') }}
+    {% endspaceless %}
+{%- endblock xhtml_simple_text -%}
+
+{%- block xhtml_children -%}{% spaceless %}
+    {% if tag.hasChildren() %}
+        {% for tag in tag.getChildren() %}
+            {{ block('xhtml') }}
+        {% endfor %}
+    {% endif %}
+    {% endspaceless %}
+{%- endblock xhtml_children -%}
+
+{# render tag attributes #}
+{%- block xhtml_attributes -%}{% spaceless %}
+	{% set attr = tag.getAttributes() %}
+    {% set a = ' ' %}
+	{% for name, values in attr %}
+        {% set a = a~name~'="'~values|join(" ")~'" ' %}
+	{% endfor %}{{ a|raw }}
+    {% endspaceless %}
+{%- endblock xhtml_attributes -%}

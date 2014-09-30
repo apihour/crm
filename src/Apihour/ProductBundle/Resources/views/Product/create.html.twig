@@ -1,0 +1,13 @@
+{% extends layoutResolver().resolve() %}
+
+{% block content %}
+    <form method="post" action="">
+        <div class="form-group">
+            {{ form_widget(form.category) }}
+        </div>
+
+        {{ form_widget(form) }}
+        {{ form_widget(form._token) }}
+        <button>update</button>
+    </form>
+{% endblock content %}

@@ -1,0 +1,6 @@
+{% extends '::login.html.twig' %}
+
+{% block content %}
+    {%  block flash_bags %}{{ parent() }}{% endblock %}
+    <div>Some additional messahes here.</div>
+{% endblock %}

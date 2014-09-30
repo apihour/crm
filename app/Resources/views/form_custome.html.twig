@@ -1,0 +1,45 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block widget_attributes %}
+    {% if form.vars.block_prefixes.1 not in ["checkbox", "radio"] %}
+        {% if attr.class is defined %}{% set classes = attr.class %}{% else %}{% set classes = "" %}{% endif %}
+        {% set attr = attr|merge({"class": classes~" form-control" }) %}
+    {% endif %}
+    {{ parent() }}
+{% endblock widget_attributes %}
+
+{% block form_row %}
+    <div class="form-group {{ block('form_errors')|trim|length > 0 ? 'has-error' : '' }}">
+        {{- form_label(form) -}}
+        {{- form_widget(form) -}}
+        {{ block('form_errors') }}
+    </div>
+{% endblock %}
+
+{% block form_errors %}
+    {% spaceless %}
+    {% if errors|length > 0 -%}
+        <span class="help-block">
+            {%- for error in errors -%}
+                <p>{{ error.message }}</p>
+            {%- endfor -%}
+        </span>
+    {%- endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block form_label -%}
+    {% if label is not sameas(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif %}
+        {% if required -%}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {%- endif %}
+        {% set label_attr = label_attr|merge({'class': 'control-label'}) %}
+        {% if label is empty -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+    {%- endif %}
+{%- endblock form_label %}

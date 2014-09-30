@@ -1,0 +1,6 @@
+services:
+  apihour.frontend.panel_tool:
+    class: Apihour\FrontendBundle\Twig\PanelToolExtension
+    arguments: ["@translator"]
+    tags:
+      - { name: twig.extension }

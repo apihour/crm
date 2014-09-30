@@ -1,0 +1,14 @@
+{% extends '::layout.html.twig' %}
+
+{% use 'TuttoDataGridBundle::datagrid.html.twig' %}
+
+{% block container %}
+    <div id="data-grid">
+        {% block left_sidebar %}
+        <div id="left_sidebar">{{ block('grid_search_form') }}</div>
+        {% endblock %}
+        {% block content %}
+        <div id="content">{{ block('grid_content') }}</div>
+        {% endblock %}
+    </div>
+{% endblock %}

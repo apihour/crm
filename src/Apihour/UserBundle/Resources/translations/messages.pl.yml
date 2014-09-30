@@ -1,0 +1,33 @@
+home_address: Adres zamieszkania
+correspondence_address: Adres do korespondencji
+same_address: Zaznacz jeśli adres do korespondecji jest inny
+
+forgot:
+  title: Zapomniałeś hasła?
+  description: Wprowadź swój adres e-mail aby wygenerować nowe hasło.
+  submit: Wyślij
+
+user:
+  contact_information: Informacje kontaktowe
+  edit_profile: Edycja
+  view_profile: Podgląd
+  create_new:
+    data:
+      title: Nowy użytkownik
+      subtitle: Dodaj nowego użytkownika
+  metadata:
+    title: Profil
+    description: Profil
+  data:
+    title: Twój profil
+    subtitle: Podgląd danych użytkownika
+  edit:
+    title_base: Podstawowe informacje
+    title_additional: Dodatkowe informacje
+    title_address: Dane adresowe
+    policy_and_terms: Klikając w "Wyślij", zgadzasz się z warunkami polityki oraz warunkami.
+
+users:
+  data:
+    title: Profile
+    subtitle: Profile

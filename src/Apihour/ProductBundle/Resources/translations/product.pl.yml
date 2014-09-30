@@ -1,0 +1,26 @@
+name: Nazwa produktu
+short_name: Nazwa skrócona
+vat: VAT
+currency: Waluta
+price: Cena jednostkowa
+vat_price: Cena brutto
+add_new: Nowy
+type:
+  name: Typ produktu
+  buy: Kupowany
+  sell: Sprzedawany
+
+table:
+  list: Lista
+  products: produktów
+
+title: Produkty
+description: Produkty
+create:
+  sell_product: Sprzedażowy
+  buy_product: Kupowany
+  title: Nowy produkt
+  description: Dodawanie nowego produktu
+
+suspend: Produkt "%name%" został zawieszony.
+activate: Produkt "%name%" został przywórcony.

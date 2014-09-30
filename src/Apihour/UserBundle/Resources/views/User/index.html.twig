@@ -1,0 +1,18 @@
+{% extends layoutResolver().resolve('::layout.html.twig') %}
+
+{% block simple_content %}
+    <div class="tabbable">
+        <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue">
+            <li class="{{ tab == 'view' ? 'active' : '' }}"><a data-toggle="tab" href="#user_profile_view">{{ "messages:user.view_profile"|trans }}</a></li>
+            <li class="{{ tab == 'edit' ? 'active' : '' }}"><a data-toggle="tab" href="#user_profile_edit">{{ "messages:user.edit_profile"|trans }}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="user_profile_view" class="tab-pane fade {{ tab == 'view' ? 'in active' : '' }}">
+                {{ render(controller('ApihourUserBundle:User:view', {'userAccount': userAccount, '_partial': true})) }}
+            </div>
+            <div id="user_profile_edit" class="tab-pane fade {{ tab == 'edit' ? 'in active' : '' }}">
+                {{ render(controller('ApihourUserBundle:User:edit', {'userAccount': userAccount, 'request': app.request, '_partial': true})) }}
+            </div>
+        </div>
+    </div>
+{% endblock simple_content %}

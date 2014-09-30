@@ -1,0 +1,9 @@
+[submodule "vendor/bundles/Knp/Bundle/MenuBundle"]
+	path = vendor/bundles/Knp/Bundle/MenuBundle
+	url = https://github.com/KnpLabs/KnpMenuBundle.git
+[submodule "vendor/KnpMenu"]
+	path = vendor/KnpMenu
+	url = https://github.com/KnpLabs/KnpMenu.git
+[submodule "vendor/ob"]
+    path = vendo/ob
+    url = https://github.com/marcaube/ObHighchartsBundle.git

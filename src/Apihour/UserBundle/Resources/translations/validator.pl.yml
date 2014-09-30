@@ -1,0 +1,4 @@
+notValid:
+  firstname: Imię jest nie poprawne
+  middlename: Drugie imię jest nie poprawne
+  lastname: Nazwisko nie jest poprawne

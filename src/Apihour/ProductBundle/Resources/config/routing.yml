@@ -1,0 +1,11 @@
+ProductController:
+  resource: @ApihourProductBundle/Controller/ProductController.php
+  type: annotation
+
+ProductAnalyticController:
+  resource: @ApihourProductBundle/Controller/ProductAnalyticController.php
+  type: annotation
+
+ProductPackageController:
+  resource: @ApihourProductBundle/Controller/ProductPackageController.php
+  type: annotation

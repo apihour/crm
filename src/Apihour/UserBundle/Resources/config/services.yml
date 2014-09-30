@@ -1,0 +1,23 @@
+services:
+  apihour.twig.user:
+    class: Apihour\UserBundle\Twig\UserExtension
+    calls:
+      - [setContainer, ["@service_container"]]
+    tags:
+      - { name: twig.extension }
+
+  apihour.avatar_file_manager:
+    class: Apihour\UserBundle\FileManager\AvatarFileManager
+    arguments: ["@image.handling", "@apihour.file.adapter"]
+
+  apihour.user_control_listener:
+    class: Apihour\UserBundle\EventListener\UserAccountControlListener
+    arguments: ["@service_container"]
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, method: handle }
+
+  apihour.account_listener:
+    class: Apihour\UserBundle\EventListener\AccountPrivilegeListener
+    arguments: ["@service_container"]
+    tags:
+      - { name: kernel.event_listener, event: kernel.controller, method: handle }

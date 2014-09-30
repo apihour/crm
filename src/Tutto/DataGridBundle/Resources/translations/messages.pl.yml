@@ -1,0 +1,7 @@
+filtersNotValid: Dane nie są poprawne
+xeditable:
+  success:
+    message: Dane zostały zapisane
+  only_post_data: Tylko dane typu POST
+  could_not_update_data: Nie udało się zapisać danych. Spróbuj ponownie później.
+  element_not_found: Element nie odnaleziony

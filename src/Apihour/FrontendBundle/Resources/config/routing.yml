@@ -1,0 +1,7 @@
+_home:
+  path: /
+  defaults: { _controller: ApihourFrontendBundle:Dashboard:index }
+
+ApihourFrontendBundle:
+  resource: @ApihourFrontendBundle/Controller/DashboardController.php
+  type: annotation

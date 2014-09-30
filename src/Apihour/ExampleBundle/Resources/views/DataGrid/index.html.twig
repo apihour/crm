@@ -1,0 +1,13 @@
+{% extends layoutResolver().resolve() %}
+
+{% block simple_content %}
+    <div class="tabbable tabs-left faq">
+        <ul class="nav nav-tabs col-md-3">
+            <li class="active"><a href="#example-1" data-toggle="tab"><i class="fa fa-smile-o"></i>Przykłąd 1</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="example-1">{{ render(path('apihour_examples_datagrids_one', {'_partial': true})) }}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endblock simple_content %}

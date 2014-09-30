@@ -1,0 +1,35 @@
+{% block flash_bag %}
+    {% spaceless %}
+        {% set all = app.session.getFlashBag().all() %}
+        {% if all|length > 0 %}
+            {% for type, messages in all %}
+                {% if type == 'error' %} {% set class = 'error' %}
+                {% elseif type == 'success' %} {% set class = 'success' %}
+                {% elseif type == 'alert' %} {% set class = 'warning' %}
+                {% else %} {% set class = 'info' %} {% endif %}
+
+                <script>
+                    $(function() {
+                        {% for msg in messages %}
+                        toastr.{{ class }}('{{ msg|trans|raw }}');
+                        {% endfor %}
+
+                        toastr.options = {
+                            "closeButton": false,
+                            "positionClass": "toast-top-right",
+                            "onclick": null,
+                            "showDuration": "1000",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                    });
+                </script>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}

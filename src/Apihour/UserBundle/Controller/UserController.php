@@ -122,7 +122,7 @@ class UserController extends AbstractDataGridController {
             $view,
             array_merge(
                 ['userAccount' => $userAccount],
-                $this->processForm($form, $request)
+                $this->processForm($form, $userAccount, $request)
             )
         );
     }
@@ -145,35 +145,35 @@ class UserController extends AbstractDataGridController {
         return ['userAccount' => $userAccount];
     }
 
-    /**
-     * @param Form $form
-     * @param Request $request
-     * @return array
-     */
-    protected function processForm(Form $form, Request $request) {
-        if ($request->isMethod('POST')) {
-            if ($form->submit($request)->isValid()) {
-                /** @var UserAccount $userAccount */
-                $userAccount = $form->getData();
-
-                $this->getEm()->beginTransaction();
-                try {
-                    /** @var UserAccountRepository $repository */
-                    $repository = $this->getRepository(UserAccount::class);
-                    $repository->update($userAccount);
-
-                    $this->addFlashSuccess();
-                    $this->getEm()->commit();
-                } catch (Exception $ex) {
-                    $this->addFlashError('formIsNotValid');
-                    $this->getEm()->rollback();
-                }
-            } else {
-                var_dump($form->getErrorsAsString());
-                $this->addFlashError('formIsNotValid');
-            }
-        }
-
-        return ['form' => $form->createView()];
-    }
+//    /**
+//     * @param Form $form
+//     * @param Request $request
+//     * @return array
+//     */
+//    protected function processForm(Form $form, Request $request) {
+//        if ($request->isMethod('POST')) {
+//            if ($form->submit($request)->isValid()) {
+//                /** @var UserAccount $userAccount */
+//                $userAccount = $form->getData();
+//
+//                $this->getEm()->beginTransaction();
+//                try {
+//                    /** @var UserAccountRepository $repository */
+//                    $repository = $this->getRepository(UserAccount::class);
+//                    $repository->update($userAccount);
+//
+//                    $this->addFlashSuccess();
+//                    $this->getEm()->commit();
+//                } catch (Exception $ex) {
+//                    $this->addFlashError('formIsNotValid');
+//                    $this->getEm()->rollback();
+//                }
+//            } else {
+//                var_dump($form->getErrorsAsString());
+//                $this->addFlashError('formIsNotValid');
+//            }
+//        }
+//
+//        return ['form' => $form->createView()];
+//    }
 } 

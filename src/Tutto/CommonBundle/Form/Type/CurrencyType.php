@@ -27,7 +27,7 @@ class CurrencyType extends AbstractFormType {
         $resolver->setDefaults([
             'class'    => Currency::class,
             'choices'  => $this->getEm()->getRepository(Currency::class)->findAll(),
-            'property' => 'currency'
+            'property' => 'name'
         ]);
     }
 

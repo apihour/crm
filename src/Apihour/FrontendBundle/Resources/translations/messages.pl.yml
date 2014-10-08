@@ -19,6 +19,7 @@ category:
 tooltip:
   view: Podgląd
   edit: Edycja
+  copy: Kopiuj
   suspend: Zawieś
   activate: Aktualizuj
 

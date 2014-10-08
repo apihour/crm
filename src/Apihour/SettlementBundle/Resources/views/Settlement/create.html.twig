@@ -1,0 +1,8 @@
+{% extends layoutResolver().resolve() %}
+
+{% block content %}
+    <form method="post" action="" role="form">
+        {{ form_widget(form) }}
+        <button class="btn btn-azure">Update</button>
+    </form>
+{% endblock %}

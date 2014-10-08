@@ -1,0 +1,8 @@
+{% extends layoutResolver().resolve() %}
+
+{% block content %}
+    <form method="post" action="">
+        {{ form_widget(form) }}
+        <button class="btn btn-info">{{ "update"|trans }}</button>
+    </form>
+{% endblock content %}

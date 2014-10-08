@@ -10,9 +10,11 @@
 
 {% block form_row %}
     <div class="form-group {{ block('form_errors')|trim|length > 0 ? 'has-error' : '' }}">
+        <div class="col-md-12">
         {{- form_label(form) -}}
         {{- form_widget(form) -}}
         {{ block('form_errors') }}
+        </div>
     </div>
 {% endblock %}
 
@@ -36,7 +38,7 @@
         {% if required -%}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
         {%- endif %}
-        {% set label_attr = label_attr|merge({'class': 'control-label'}) %}
+        {#{% set label_attr = label_attr|merge({'class': 'control-label'}) %}#}
         {% if label is empty -%}
             {% set label = name|humanize %}
         {%- endif -%}

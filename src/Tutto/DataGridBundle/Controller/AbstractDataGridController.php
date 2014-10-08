@@ -131,17 +131,21 @@ abstract class AbstractDataGridController extends AbstractController {
                 try {
                     $errors = $form->get($request->get('name'))->getErrors();
                 } catch (Exception $ex) {
-                    $errors = $form->getErrors();
                 }
 
+                if (empty($errors)) {
+                    $errors = $form->getErrors();
+                }
+                $i=0;
                 $message = '';
                 foreach ($errors as $error) {
+                    $i++;
                     $message = $error->getMessage();
                 }
 
                 return new JsonResponse([
                     'success' => false,
-                    'message' => $message
+                    'message' => $message,
                 ], 300);
             }
         }

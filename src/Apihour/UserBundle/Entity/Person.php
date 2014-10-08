@@ -140,7 +140,7 @@ class Person implements JsonSerializable {
 
     /**
      * @ORM\ManyToOne(targetEntity="Apihour\FileBundle\Entity\File", cascade={"all"})
-     * @ORM\JoinColumn(name="avatar", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="avatar", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      *
      * @var File
      */

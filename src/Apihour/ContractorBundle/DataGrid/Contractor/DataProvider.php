@@ -1,18 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pkrawczyk
- * Date: 18.09.14
- * Time: 12:55
- */
 
 namespace Apihour\ContractorBundle\DataGrid\Contractor;
 
-
-use Apihour\ContractorBundle\Entity\Contractor;
-use Doctrine\ORM\QueryBuilder;
+use Apihour\ContractorBundle\Entity\AbstractContractor;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Tutto\CommonBundle\DependencyInjection\AbstractContainerAware;
+use Apihour\ContractorBundle\Entity\Contractor;
 use Tutto\DataGridBundle\DataGrid\DataProvider\DoctrineDataProvider;
 
 /**
@@ -20,13 +12,12 @@ use Tutto\DataGridBundle\DataGrid\DataProvider\DoctrineDataProvider;
  * @package Apihour\ContractorBundle\DataGrid\Contractor
  */
 class DataProvider extends DoctrineDataProvider {
-
     /**
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container = null)
     {
-        parent::__construct(Contractor::class, $container);
+        parent::__construct(AbstractContractor::class, $container);
     }
 
     public function getQueryBuilder()

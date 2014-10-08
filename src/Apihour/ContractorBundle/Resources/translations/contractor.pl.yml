@@ -1,0 +1,11 @@
+create:
+  buyer:
+    title: Nowy klient
+    subtitle: Dodaj nowego klienta
+  seller:
+    title: Nowy dostawca
+    subtitle: Dodaj nowe dostawcę
+
+form:
+  shortname: Nazwa skrócona
+  iban: IBAN

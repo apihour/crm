@@ -30,3 +30,6 @@ flash_bag:
     success: Dane zostały zapisane.
     error: Nie udało się zapisać danych.
     alert: Dorobi komunikat
+
+true: Tak
+false: Nie

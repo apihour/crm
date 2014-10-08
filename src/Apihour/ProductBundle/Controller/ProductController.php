@@ -161,37 +161,4 @@ class ProductController extends AbstractDataGridController {
 
         return $this->redirect($_SERVER['HTTP_REFERER']);
     }
-
-    /**
-     * @param FormTypeInterface $type
-     * @param Product $product
-     * @param Request $request
-     * @return array
-     */
-    protected function processForm(FormTypeInterface $type, Product $product = null, Request $request = null) {
-        $request = $request !== null ? $request : $this->getRequest();
-        $product = $product !== null ? $product : new Product();
-
-        $form = $this->createForm($type, $product);
-        if ($request->isMethod('POST')) {
-            if ($form->submit($request)->isValid()) {
-                $this->getEm()->beginTransaction();
-
-                try {
-                    /** @var ProductRepository $productRepository */
-                    $productRepository = $this->getRepository(Product::class);
-                    $productRepository->update($form->getData());
-
-                    $this->getEm()->commit();
-                } catch (Exception $ex) {
-                    $this->getEm()->rollback();
-                    $this->addFlashError('couldNotUpdate');
-                }
-            } else {
-                $this->addFlashError('formNotValid');
-            }
-        }
-
-        return ['form' => $form->createView()];
-    }
 } 

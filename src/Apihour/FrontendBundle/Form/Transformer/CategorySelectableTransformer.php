@@ -2,6 +2,8 @@
 
 namespace Apihour\FrontendBundle\Form\Transformer;
 
+use Apihour\FrontendBundle\Repository\CategoryRepository;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Apihour\FrontendBundle\Entity\Category;
 
@@ -11,11 +13,27 @@ use Apihour\FrontendBundle\Entity\Category;
  */
 class CategorySelectableTransformer implements DataTransformerInterface {
     /**
+     * @var CategoryRepository
+     */
+    protected $repository;
+
+    /**
+     * @param CategoryRepository $repository
+     */
+    public function __construct(CategoryRepository $repository) {
+        $this->repository = $repository;
+    }
+
+    /**
      * @param mixed $value
      * @return mixed
      */
     public function transform($value) {
-        return $value;
+        if ($value !== null) {
+            $this->repository->find($value->getId());
+        } else {
+            return null;
+        }
     }
 
     /**

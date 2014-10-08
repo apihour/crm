@@ -9,6 +9,8 @@ use Tutto\CommonBundle\Entity\AbstractEntity;
 /**
  * Class AbstractCreatedBy
  * @package Apihour\FrontendBundle\Entity
+ *
+ * @ORM\MappedSuperclass()
  */
 abstract class AbstractCreatedBy extends AbstractEntity {
     /**

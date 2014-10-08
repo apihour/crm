@@ -1,0 +1,41 @@
+shortDescription: Krótki opis
+description: Opis
+group: Grupa
+value: Wartość pola
+type: Typ pola
+name: Nazwa
+default: Defaultowa wartość
+
+form:
+  group:
+    description: Nazwa grupy (grupowanie opcji)
+  name:
+    description: Nazwa opcji (powinna być unikatowe w danej grupie)
+  type:
+    description: Typ pola
+
+table:
+  list: Lista
+  options: Opcji konta
+
+common:
+  title: Dodatkowe opcje dla
+  title_bold: kont
+
+
+edit:
+  title: Edycja opcji
+  subtitle: Możesz edytować opcje dla wszystkich kont.
+
+create:
+  title: Nowa opcja
+  subtitle: Dodaj nową opcję dla kont.
+  new: Stwórz nową opcję
+
+list:
+  title: Lista zapisanych opcji
+  subtitle: Możesz edytować bezpośrednio z listy.
+
+owner:
+  title: Ustawienia konta
+  subtitle: Tutaj możesz ustawić swoje preferencje do konta

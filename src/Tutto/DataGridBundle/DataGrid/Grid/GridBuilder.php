@@ -36,10 +36,25 @@ class GridBuilder extends AbstractContainerAware implements GridBuilderInterface
 
     /**
      * @param AbstractColumn $column
-     * @return void
      */
     public function addColumn(AbstractColumn $column) {
         $this->columns[$column->getName()] = $column;
+    }
+
+    /**
+     * @param string $name
+     * @return AbstractColumn|null
+     */
+    public function getColumn($name) {
+        return $this->hasColumn($name) ? $this->columns[$name] : null;
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function hasColumn($name) {
+        return isset($this->columns[$name]);
     }
 
     /**

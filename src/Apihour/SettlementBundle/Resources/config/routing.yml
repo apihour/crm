@@ -1,0 +1,3 @@
+IncomeIncomeController:
+  resource: @ApihourSettlementBundle/Controller/SettlementController.php
+  type: annotation

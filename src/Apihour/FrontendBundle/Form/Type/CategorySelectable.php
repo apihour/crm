@@ -5,6 +5,7 @@ namespace Apihour\FrontendBundle\Form\Type;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Tutto\CommonBundle\Form\AbstractFormType;
 use Apihour\FrontendBundle\Entity\Category;
 use Apihour\FrontendBundle\Form\Transformer\CategorySelectableTransformer;
@@ -54,8 +55,9 @@ class CategorySelectable extends AbstractFormType {
             ]
         );
 
-        $builder->addModelTransformer(new CategorySelectableTransformer());
+        $builder->addModelTransformer(new CategorySelectableTransformer($this->getRepository(Category::class)));
     }
+
 
     /**
      * @return string

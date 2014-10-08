@@ -1,0 +1,97 @@
+{% extends layoutResolver().resolve() %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/apihoursettings/js/customFormType.js') }}"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            CustomFormType.init({
+                handleChangeableType: $('#type'),
+                choiceContainer: $('.choice-container'),
+                baseFormElementParams: {
+                    name: '{{ form.constraints.choices.vars.prototype.vars.full_name|replace({"[__name__]": ''}) }}'
+                }
+            });
+
+            CustomFormType.getChoiceContainer().append(
+                    CustomFormType.decorateChoiceAddButton(CustomFormType.getChoiceContainer())
+            );
+
+            $('i.remove-element').click(function() {
+                $(this).parentsUntil('.form-group').parent().remove();
+            });
+
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block simple_content %}
+    <form method="post" action="" role="form" class="form-horizontal">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            {{ "account_options:common.title"|trans }}
+                            <span class="text-bold">{{ "account_options:common.title_bold"|trans }}</span>
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        {{ form_label(form.group) }}
+                                        {{ form_widget(form.group) }}
+                                        <span class="help-block">
+                                            <i class="fa fa-info-circle"></i>
+                                            {{ "account_options:form.group.description"|trans }}
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {{ form_label(form.name) }}
+                                        {{ form_widget(form.name) }}
+                                        <span class="help-block">
+                                            <i class="fa fa-info-circle"></i>
+                                            {{ "account_options:form.name.description"|trans }}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">{{ form_row(form.shortDescription) }}</div>
+                                    <div class="form-group">{{ form_row(form.description) }}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        {{ form_label(form.type) }}
+                                        {{ form_widget(form.type) }}
+                                        <span class="help-block">
+                                            <i class="fa fa-info-circle"></i>
+                                            {{ "account_options:form.type.description"|trans }}
+                                        </span>
+                                    </div>
+                                </div>
+                                {{ form_row(form.default) }}
+                                {{ form_row(form.constraints.required) }}
+
+                                <div class="choice-container">
+                                    {{ form_label(form.constraints.choices) }}
+                                    {% for choice in form.constraints.choices %}
+                                        <div class="form-group">
+                                            <div class="col-md-12">{{ form_widget(choice) }}</div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-info">Save</button>
+                        {{ form_widget(form._token) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock simple_content %}

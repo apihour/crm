@@ -3,6 +3,7 @@
 namespace Apihour\ProductBundle\Entity;
 
 use Apihour\ContractorBundle\Entity\Contractor;
+use Apihour\ContractorBundle\Entity\Seller;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,8 +21,10 @@ use Tutto\CommonBundle\Entity\Currency;
  * @ORM\Table(name="products")
  */
 class Product extends AbstractOwnerUserAccount {
-    const TYPE_SELL = 'sell';
-    const TYPE_BUY  = 'buy';
+    const TYPE_SELL     = 'sell';
+    const TYPE_BUY      = 'buy';
+    const VAT_INPUT     = 1;
+    const VAT_EXEMPTION = 0;
 
     /**
      * @ORM\Id()
@@ -71,9 +74,18 @@ class Product extends AbstractOwnerUserAccount {
     protected $currency;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     *
      * @var int
      */
     protected $vat;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false, options={"default": 1})
+     *
+     * @var int
+     */
+    protected $vatType = self::VAT_INPUT;
 
     /**
      * @ORM\Column(length=20, nullable=true)
@@ -98,10 +110,10 @@ class Product extends AbstractOwnerUserAccount {
     protected $category = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Apihour\ContractorBundle\Entity\Contractor")
+     * @ORM\ManyToOne(targetEntity="Apihour\ContractorBundle\Entity\Seller")
      * @ORM\JoinColumn(name="supplier_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      *
-     * @var Contractor
+     * @var Seller
      */
     protected $supplier = null;
 

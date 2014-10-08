@@ -33,7 +33,7 @@ class Grid implements GridInterface {
         $priceColumn->addPostAccessEvent(function (Event $event) {
             /** @var Product $product */
             $product = $event->getData();
-            $event->setValue(number_format($product->getPrice(), 2, '.', ',').' '.$product->getCurrency()->getCurrency());
+            $event->setValue(number_format($product->getPrice(), 2, '.', ',').' '.$product->getCurrency()->getName());
         });
 
 

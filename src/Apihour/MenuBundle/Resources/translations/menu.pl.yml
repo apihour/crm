@@ -9,7 +9,10 @@ users:
 contractors:
   index: Kontrahenci
   list: Lista kontrahentów
-  create: Utwórz kontrahenta
+  create:
+    index: Nowy
+    seller: Dostawca
+    buyer: Klient
 
 products:
   index: Produkty
@@ -19,3 +22,25 @@ products:
     index: Grupy produktowe
     list: Lista grup produktowych
     create: Nowa grupa produktowa
+
+settlements:
+  index: Rozliczenia
+  create:
+    invoice: Nowa faktura
+    proforma: Nowa faktura proforma
+    bill: Nowy rachunek
+  incomes:
+    index: Przychody
+  expenses:
+    index: Koszty
+
+settings:
+  index: Ustawienia
+  accounts:
+    index: Opcje dla kont
+    list: Lista opcji
+    create: Nowa opcja
+  contractors:
+    index: Opcje dla kontrahentów
+    list: Lista opcji
+    create: Nowa opcja

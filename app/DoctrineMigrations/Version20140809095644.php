@@ -25,6 +25,7 @@ class Version20140809095644 extends AbstractMigration
         $contractorTrader  = Role::CONTRACTOR_TRADER;
         $contractorManager = Role::CONTRACTOR_MANAGER;
         $contractorTele    = Role::CONTRACTOR_TELEMARKETING;
+        $contractorWorker  = Role::CONTRACTOR_WORKER;
 
         $this->addSql("INSERT INTO roles (parent, name) VALUES (NULL, '{$guest}');");
         $this->addSql("SET @GuestParent:=(SELECT id FROM roles WHERE name = '{$guest}');");
@@ -41,6 +42,7 @@ class Version20140809095644 extends AbstractMigration
         $this->addSql("INSERT INTO roles (parent, name) VALUES (@ContractorParent, '{$contractorTrader}');");
         $this->addSql("INSERT INTO roles (parent, name) VALUES (@ContractorParent, '{$contractorManager}');");
         $this->addSql("INSERT INTO roles (parent, name) VALUES (@ContractorParent, '{$contractorTele}');");
+        $this->addSql("INSERT INTO roles (parent, name) VALUES (@ContractorParent, '{$contractorWorker}')");
     }
 
     /**

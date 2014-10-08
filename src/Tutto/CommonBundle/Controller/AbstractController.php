@@ -2,21 +2,28 @@
 
 namespace Tutto\CommonBundle\Controller;
 
+use Doctrine\Common\Persistence\Mapping\MappingException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Tutto\CommonBundle\DependencyInjection\ContainerAwareInterface;
 
 use LogicException;
+use Exception;
 use Swift_Message;
+use Tutto\CommonBundle\Entity\AbstractEntity;
+use Tutto\CommonBundle\Repository\AbstractEntityRepository;
 use Tutto\SecurityBundle\Entity\User;
 
 /**
@@ -240,5 +247,68 @@ class AbstractController extends Controller implements ContainerAwareInterface {
      */
     public function isLogged() {
         return $this->getUser() instanceof UserInterface;
+    }
+
+    /**
+     * @param Form|AbstractType $form
+     * @param null|object $entity
+     * @param Request $request
+     * @param array $options
+     * @return array|RedirectResponse
+     * @throws Exception
+     * @throws MappingException
+     */
+    protected function processForm($form, $entity = null, Request $request = null, array $options = []) {
+        if ($form instanceof AbstractType) {
+            $type = $form;
+            $form = $this->createForm($type, $entity);
+        } elseif (!$form instanceof Form) {
+            throw new LogicException("Variable 'form' is not instance of Form or AbstractType.");
+        }
+
+        $request = $request !== null ? $request : $this->getRequest();
+
+        if ($request->isMethod('post')) {
+            if ($form->handleRequest($request)->isValid()) {
+                $this->getEm()->beginTransaction();
+                try {
+                    if ($entity === null) {
+                        $entity = $form->getData();
+                    }
+
+                    $repository = $this->getRepository(get_class($entity));
+                    if ($repository instanceof AbstractEntityRepository) {
+                        $repository->update($entity);
+                    } else {
+                        $this->getEm()->persist($entity);
+                        $this->getEm()->flush();
+                    }
+
+                    $this->getEm()->commit();
+                    $this->addFlashSuccess();
+
+                    if (isset($options['redirect'])) {
+                        $options['redirectParams'] = [];
+                        $params = array_merge([], $options['redirectParams']);
+                        return $this->redirect($this->generateUrl($options['redirect'], $params));
+                    }
+                } catch (MappingException $ex) {
+                    throw $ex;
+                } catch (RouteNotFoundException $ex) {
+                    throw $ex;
+                } catch (Exception $ex) {
+                    $this->getEm()->rollback();
+                    $this->addFlashError();
+                }
+            } else {
+                $this->addFlashError();
+            }
+        }
+
+        return [
+            'form'    => $form->createView(),
+            'entity'  => $entity,
+            'request' => $request
+        ];
     }
 }

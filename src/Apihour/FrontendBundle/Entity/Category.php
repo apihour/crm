@@ -57,6 +57,10 @@ class Category extends AbstractOwnerUserAccount {
         $this->children = new ArrayCollection();
     }
 
+    public function getId() {
+        return $this->id;
+    }
+
     /**
      * @return string
      */

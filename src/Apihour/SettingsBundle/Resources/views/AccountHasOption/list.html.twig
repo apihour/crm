@@ -1,0 +1,10 @@
+{% extends '@ApihourSettings/Option/list.html.twig' %}
+
+{% block create_menu %}
+<div class="btn-group pull-right">
+    <a href="{{ path('apihour_admin_account_option_create') }}" class="btn btn-success dropdown-toggle">
+        {{ "account_options:create.new"|trans }}
+        <i class="fa fa-plus"></i>
+    </a>
+</div>
+{% endblock create_menu %}

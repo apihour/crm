@@ -19,11 +19,16 @@ use Tutto\SecurityBundle\Entity\User;
  * Class AbstractEntityRepository
  * @package Tutto\CommonBundle\Repository
  */
-class AbstractEntityRepository extends EntityRepository implements ContainerAwareInterface {
+abstract class AbstractEntityRepository extends EntityRepository implements ContainerAwareInterface {
     /**
      * @var ContainerInterface
      */
     protected $container;
+
+    public function update($entity) {
+        $this->getEm()->persist($entity);
+        $this->getEm()->flush();
+    }
 
     /**
      * @return Request

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @package Tutto\CommonBundle\Entity
  *
  * @ORM\Entity()
- * @ORM\Table(name="currencies", indexes={@ORM\Index(name="unique_currency_name", columns={"currency"})})
+ * @ORM\Table(name="currencies", indexes={@ORM\Index(name="unique_currency_name", columns={"name"})})
  */
 class Currency extends AbstractEntity {
     /**
@@ -26,7 +26,14 @@ class Currency extends AbstractEntity {
      *
      * @var string
      */
-    protected $currency;
+    protected $name;
+
+    /**
+     * @ORM\Column(length=4, nullable=false)
+     *
+     * @var string
+     */
+    private $lang;
 
     /**
      * @ORM\Column(length=255, nullable=true)
@@ -45,15 +52,29 @@ class Currency extends AbstractEntity {
     /**
      * @return string
      */
-    public function getCurrency() {
-        return $this->currency;
+    public function getName() {
+        return $this->name;
     }
 
     /**
-     * @param string $currency
+     * @param string $name
      */
-    public function setCurrency($currency) {
-        $this->currency = $currency;
+    public function setName($name) {
+        $this->currency = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLang() {
+        return $this->lang;
+    }
+
+    /**
+     * @param string $lang
+     */
+    public function setLang($lang) {
+        $this->lang = $lang;
     }
 
     /**

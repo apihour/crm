@@ -16,7 +16,7 @@ class ProductRepository extends AbstractEntityRepository {
     /**
      * @param Product $product
      */
-    public function update(Product $product) {
+    public function update($product) {
         if ($product->getCategory() !== null) {
             /** @var CategoryRepository $categoryRepository */
             $categoryRepository = $this->getRepository(Category::class);

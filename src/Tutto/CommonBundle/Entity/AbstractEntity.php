@@ -15,28 +15,28 @@ use Tutto\CommonBundle\Util\Status;
  */
 abstract class AbstractEntity {
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=false, options={"default": "0000-00-00 00:00:00"})
      *
      * @var DateTime
      */
     protected $createdAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, options={"default": "0000-00-00 00:00:00"})
      *
      * @var DateTime
      */
     protected $modifiedAt;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false, options={"default": 1})
      *
      * @var int
      */
     protected $status = Status::ENABLED;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=false, options={"default": 0})
      *
      * @var boolean
      */

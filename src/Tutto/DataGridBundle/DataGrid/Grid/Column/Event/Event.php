@@ -5,6 +5,7 @@ use Tutto\DataGridBundle\DataGrid\Grid\Column\AbstractColumn;
 use Tutto\DataGridBundle\DataGrid\Grid\Column\CheckboxDecorator;
 use Tutto\DataGridBundle\DataGrid\Grid\Column\Column;
 use Tutto\DataGridBundle\DataGrid\Grid\Column\Decorator\DecoratorInterface;
+use Tutto\DataGridBundle\DataGrid\Grid\GridBuilder;
 use Tutto\XhtmlBundle\Lib\AbstractTag;
 use Tutto\XhtmlBundle\Lib\SimpleText;
 use Tutto\XhtmlBundle\Lib\Tag;
@@ -17,6 +18,7 @@ use Tutto\XhtmlBundle\Lib\TagInterface;
 class Event implements EventInterface {
     protected $data;
     protected $value;
+    protected $gridBuilder;
 
     /**
      * @var AbstractColumn
@@ -33,6 +35,11 @@ class Event implements EventInterface {
         $this->setValue($value);
         $this->setColumn($column);
     }
+
+    public function setGridBuilder(GridBuilder $gridBuilder) {
+        $this->gridBuilder = $gridBuilder;
+    }
+
 
     /**
      * @return mixed

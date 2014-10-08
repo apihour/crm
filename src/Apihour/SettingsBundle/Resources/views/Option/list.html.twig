@@ -1,0 +1,16 @@
+{% extends layoutResolver().resolve('::datagrid.html.twig') %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="pull-left">
+                {{ "account_options:table.list"|trans }}
+                <span class="text-bold">{{ "account_options:table.options"|trans }}</span>
+            </h4>
+
+            {% block create_menu %}
+            {% endblock create_menu %}
+        </div>
+    </div>
+    {{ block('grid_content') }}
+{% endblock content %}

@@ -89,37 +89,4 @@ class ProductPackageController extends AbstractDataGridController {
      */
     public function editAction(ProductPackage $productPackage) {
     }
-
-    /**
-     * @param ProductPackageType $productPackageType
-     * @param ProductPackage $productPackage
-     * @param Request $request
-     * @return array
-     */
-    protected function processForm(ProductPackageType $productPackageType, ProductPackage $productPackage = null, Request $request = null) {
-        $request = $request !== null ? $request : $this->getRequest();
-        $form    = $this->createForm($productPackageType, $productPackage);
-
-        if ($request->isMethod('post')) {
-            if ($form->handleRequest($request)->isValid()) {
-                $this->getEm()->beginTransaction();
-                try {
-                    /** @var ProductPackageRepository $productPackageRepository */
-                    $productPackageRepository = $this->getRepository(ProductPackage::class);
-                    $productPackageRepository->update($productPackage);
-
-                    $this->getEm()->commit();
-                } catch (Exception $ex) {
-                    $this->getEm()->rollback();
-                }
-            } else {
-                $this->addFlashError('formIsNotValid');
-            }
-        }
-
-        return [
-            'form'           => $form->createView(),
-            'productPackage' => $productPackage
-        ];
-    }
 } 

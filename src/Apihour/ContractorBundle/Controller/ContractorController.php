@@ -2,20 +2,20 @@
 
 namespace Apihour\ContractorBundle\Controller;
 
-use Symfony\Component\Form\Form;
+use Doctrine\Common\Persistence\Mapping\MappingException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+use Tutto\CommonBundle\Form\Subscriber\IgnoreNonSubmittedFieldSubscriber;
+use Tutto\DataGridBundle\Controller\AbstractDataGridController;
+use Apihour\ContractorBundle\Entity\AbstractContractor;
 use Apihour\ContractorBundle\DataGrid\Contractor\DataProvider;
 use Apihour\ContractorBundle\DataGrid\Contractor\FiltersType;
 use Apihour\ContractorBundle\DataGrid\Contractor\Grid;
-use Apihour\ContractorBundle\Entity\Contractor;
-use Apihour\ContractorBundle\Entity\Contractor\ContractorType;
-use Apihour\ContractorBundle\Form\Type\CompanyContractorType;
-use Apihour\ContractorBundle\Form\Type\PersonContractorType;
-use Tutto\CommonBundle\Form\Subscriber\IgnoreNonSubmittedFieldSubscriber;
-use Tutto\DataGridBundle\Controller\AbstractDataGridController;
-use Apihour\ContractorBundle\Repository\ContractorRepository;
+use Apihour\ContractorBundle\Form\Type\ContractorType;
+use Apihour\ContractorBundle\Entity\Buyer;
+use Apihour\ContractorBundle\Entity\Seller;
 use LogicException;
 use Exception;
 
@@ -57,31 +57,56 @@ class ContractorController extends AbstractDataGridController {
     }
 
     /**
-     * @Route(
-     *      "/contractor/create",
-     *      name="apihour_contractor_create"
+     * @Route("/contractor/seller/create",
+     *      name="apihour_contractor_seller_create"
      * )
-     * @Template()
-     * @PageData(title="contractor.create.title", subtitle="contractor.create.subtitle")
-     * @Metadata(title="contractor.create.title", description="contractor.create.subtitle")
+     * @Route("/contractor/seller/copy/{id}",
+     *      name="apihour_contractor_seller_copy",
+     *      requirements={"id"="\d+"}
+     * )
      * @Authorization({Role::ADMIN, Role::CONTRACTOR})
+     * @Template("@ApihourContractor/Contractor/form.html.twig")
+     * @PageData(title="contractor:create.seller.title", subtitle="contractor:create.seller.subtitle")
+     * @Metadata(title="contractor:create.seller.title", description="contractor:create.seller.subtitle")
      *
      * @param Request $request
+     * @param Seller $seller
+     * @return array
      */
-    public function createAction(Request $request) {
+    public function createSellerAction(Request $request, Seller $seller = null) {
+        return $this->createAction($request, $seller !== null ? $seller : new Seller());
+    }
 
-        $contractor = new Contractor();
+    /**
+     * @Route("/contractor/buyer/create",
+     *      name="apihour_contractor_buyer_create"
+     * )
+     * @Route("/contractor/buyer/copy/{id}",
+     *      name="apihour_contractor_buyer_copy",
+     *      requirements={"id"="\d+"}
+     * )
+     * @Authorization({Role::ADMIN, Role::CONTRACTOR})
+     * @Template("@ApihourContractor/Contractor/form.html.twig")
+     * @PageData(title="contractor:create.buyer.title", subtitle="contractor:create.buyer.subtitle")
+     * @Metadata(title="contractor:create.buyer.title", description="contractor:create.buyer.subtitle")
+     *
+     * @param Request $request
+     * @param Buyer $buyer
+     * @return array
+     */
+    public function createBuyerAction(Request $request, Buyer $buyer = null) {
+        return $this->createAction($request, $buyer, $buyer !== null ? $buyer : new Buyer());
+    }
 
-        $form = $this->createForm(new PersonContractorType($contractor), $contractor);
-        $view = '@ApihourContractor/Contractor/edit/person.form.html.twig';
-
-        return $this->render(
-            $view,
-            array_merge(
-                ['contractor' => $contractor],
-                $this->processForm($form, $request)
-            )
-        );
+    /**
+     * @param Request $request
+     * @param AbstractContractor $contractor
+     * @return array|RedirectResponse
+     * @throws MappingException
+     * @throws Exception
+     */
+    protected function createAction(Request $request, AbstractContractor $contractor = null) {
+        return $this->processForm(new ContractorType(), $contractor, $request);
     }
 
     /**
@@ -96,10 +121,10 @@ class ContractorController extends AbstractDataGridController {
      * @Metadata(title="contractor.view.title", description="contractor.view.subtitle")
      * @Authorization({Role::ADMIN, Role::CONTRACTOR})
      *
-     * @param Contractor $contractor
+     * @param AbstractContractor $contractor
      * @return array
      */
-    public function viewAction(Contractor $contractor) {
+    public function viewAction(AbstractContractor $contractor) {
         return ['contractor' => $contractor];
     }
 
@@ -120,26 +145,6 @@ class ContractorController extends AbstractDataGridController {
      * @throws \LogicException
      */
     public function editAction(Contractor $contractor, Request $request) {
-
-        if ($contractor->getType() == ContractorType::TYPE_PERSON) {
-            $form = $this->createForm(new PersonContractorType($contractor), $contractor);
-            $view = '@ApihourContractor/Contractor/edit/person.form.html.twig';
-        }
-        elseif ($contractor->getType() == ContractorType::TYPE_COMPANY) {
-            $form = $this->createForm(new CompanyContractorType($contractor), $contractor);
-            $view = '@ApihourContractor/Contractor/edit/company.form.html.twig';
-        }
-        else {
-            throw new LogicException("Contractor type is not valid.");
-        }
-
-        return $this->render(
-            $view,
-            array_merge(
-                ['contractor' => $contractor],
-                $this->processForm($form, $request)
-            )
-        );
     }
 
     /**
@@ -158,39 +163,6 @@ class ContractorController extends AbstractDataGridController {
      * @return array
      */
     public function deleteAction(Contractor $contractor) {
-        /** @var ContractorRepository $repository */
-        $repository = $this->getRepository(Contractor::class);
-        $repository->delete($contractor);
-        return [];
-    }
-
-    /**
-     * @param Form $form
-     * @param Request $request
-     * @return array
-     */
-    protected function processForm(Form $form, Request $request) {
-        if ($request->isMethod('POST')) {
-            if ($form->submit($request)->isValid()) {
-                /** @var Contractor $contractor */
-                $contractor = $form->getData();
-                $this->getEm()->beginTransaction();
-                try {
-                    /** @var ContractorRepository $repository */
-                    $repository = $this->getRepository(Contractor::class);
-                    $repository->update($contractor);
-
-                    $this->addFlashSuccess();
-                    $this->getEm()->commit();
-                } catch (Exception $ex) {
-                    $this->addFlashError($ex->getMessage() .''.get_class($ex));
-                    $this->getEm()->rollback();
-                }
-            } else {
-                $this->addFormFlashError($form);
-            }
-        }
-        return ['form' => $form->createView()];
     }
 
     /**
@@ -206,15 +178,15 @@ class ContractorController extends AbstractDataGridController {
      * @Method("POST")
      *
      * @param Request $request
-     * @param Contractor $contractor
-     * @return mixed|void
+     * @param AbstractContractor $contractor
+     * @return mixed
      */
-    public function changeDataAction(Contractor $contractor, Request $request) {
+    public function changeDataAction(AbstractContractor $contractor, Request $request) {
         $formBuilder = $this->createFormBuilder(
             $contractor,
             [
                 'csrf_protection'    => false,
-                'data_class'         => Contractor::class,
+                'data_class'         => AbstractContractor::class,
                 'cascade_validation' => true,
             ]
         );
@@ -226,4 +198,4 @@ class ContractorController extends AbstractDataGridController {
 
         return parent::updateData($formBuilder, $contractor, $request);
     }
-} 
+}

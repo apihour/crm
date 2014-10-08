@@ -16,3 +16,11 @@ ApihourContractorBundle:
 #Routing for ApihourProductBundle
 ApihourProductBundle:
   resource: @ApihourProductBundle/Resources/config/routing.yml
+
+#Routing for ApihourSettlementBundle
+ApihourSettlementBundle:
+  resource: @ApihourSettlementBundle/Resources/config/routing.yml
+
+#Routing for ApihourSettingsBundle
+ApihourSettingsBundle:
+  resource: @ApihourSettingsBundle/Resources/config/routing.yml

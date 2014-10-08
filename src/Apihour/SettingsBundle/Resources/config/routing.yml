@@ -1,0 +1,11 @@
+AccountHasOptionController:
+  resource: @ApihourSettingsBundle/Controller/AccountHasOptionController.php
+  type: annotation
+
+AccountOptionController:
+  resource: @ApihourSettingsBundle/Controller/AccountOptionController.php
+  type: annotation
+
+ContractorOptionController:
+  resource: @ApihourSettingsBundle/Controller/ContractorOptionController.php
+  type: annotation

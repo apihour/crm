@@ -39,7 +39,7 @@ class CategoryRepository extends AbstractEntityRepository {
      * @param Category $category
      * @throws AccountNotSwitchedException
      */
-    public function update(Category $category) {
+    public function update($category) {
         if ($category->getOwnerUserAccount() === null) {
             $category->setOwnerUserAccount($this->getCurrentUserAccount());
         }
